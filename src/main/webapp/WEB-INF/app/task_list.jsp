@@ -24,11 +24,15 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/task/new/"/>">Aufgabe anlegen</a>
+            <a href="<c:url value="/app/task/new/"/>">Angebot anlegen</a>
         </div>
 
         <div class="menuitem">
             <a href="<c:url value="/app/categories/"/>">Kategorien bearbeiten</a>
+        </div>
+        
+        <div class="menuitem">
+            <a href="<c:url value="/app/categories/"/>">Benutzer bearbeiten</a>
         </div>
     </jsp:attribute>
 
@@ -66,7 +70,7 @@
         <c:choose>
             <c:when test="${empty tasks}">
                 <p>
-                    Es wurden keine Aufgaben gefunden. 🐈
+                    Es wurden keine Angebote gefunden. 🐈
                 </p>
             </c:when>
             <c:otherwise>
@@ -77,9 +81,11 @@
                         <tr>
                             <th>Bezeichnung</th>
                             <th>Kategorie</th>
-                            <th>Eigentümer</th>
-                            <th>Status</th>
-                            <th>Fällig am</th>
+                            <th>Benutzer</th>
+                            <th>Angebotstyp</th>
+                            <th>Preis</th>
+                            <th>Preistyp</th>
+                            <th>Datum</th>
                         </tr>
                     </thead>
                     <c:forEach items="${tasks}" var="task">
@@ -96,11 +102,16 @@
                                 <c:out value="${task.owner.username}"/>
                             </td>
                             <td>
-                                <c:out value="${task.status.label}"/>
+                                <c:out value="${task.type.label}"/>
                             </td>
                             <td>
-                                <c:out value="${utils.formatDate(task.dueDate)}"/>
-                                <c:out value="${utils.formatTime(task.dueTime)}"/>
+                                <c:out value="${task.price}"/>
+                            </td>
+                            <td>
+                                <c:out value="${task.price.type}"/>
+                            </td>
+                            <td>
+                                <c:out value="${utils.formatDate(task.Date)}"/>
                             </td>
                         </tr>
                     </c:forEach>
