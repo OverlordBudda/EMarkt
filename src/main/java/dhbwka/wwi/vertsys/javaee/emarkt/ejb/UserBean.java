@@ -42,14 +42,20 @@ public class UserBean {
      *
      * @param username
      * @param password
+     * @param name
+     * @param strasse
+     * @param plz
+     * @param ort
+     * @param telefon
+     * @param mail
      * @throws UserBean.UserAlreadyExistsException
      */
-    public void signup(String username, String password) throws UserAlreadyExistsException {
+    public void signup(String username, String password, String name, String strasse, int plz, String ort, String telefon, String mail ) throws UserAlreadyExistsException {
         if (em.find(User.class, username) != null) {
             throw new UserAlreadyExistsException("Der Benutzername $B ist bereits vergeben.".replace("$B", username));
         }
 
-        User user = new User(username, password);
+        User user = new User(username, password, name, strasse, plz, ort, telefon, mail);
         user.addToGroup("emarkt-app-user");
         em.persist(user);
     }

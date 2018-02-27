@@ -59,9 +59,22 @@ public class SignUpServlet extends HttpServlet {
         String username = request.getParameter("signup_username");
         String password1 = request.getParameter("signup_password1");
         String password2 = request.getParameter("signup_password2");
+        String name = request.getParameter("signup_name");
+        String strasse = request.getParameter("signup_strasse");
+        String plz = request.getParameter("signup_plz");
+        String ort = request.getParameter("signup_ort");
+        String telefon = request.getParameter("signup_telefon");
+        String mail = request.getParameter("signup_mail");
+        int iplz=00000;
+        try{
+             iplz = Integer.parseInt(plz);
+        
+        }catch (NumberFormatException nfe){
+            
+        }
         
         // Eingaben prüfen
-        User user = new User(username, password1);
+        User user = new User(username, password1, name, strasse, iplz, ort, telefon, mail);
         List<String> errors = this.validationBean.validate(user);
         this.validationBean.validate(user.getPassword(), errors);
         
@@ -72,7 +85,7 @@ public class SignUpServlet extends HttpServlet {
         // Neuen Benutzer anlegen
         if (errors.isEmpty()) {
             try {
-                this.userBean.signup(username, password1);
+                this.userBean.signup(username, password1, name, strasse, iplz, ort, telefon, mail);
             } catch (UserBean.UserAlreadyExistsException ex) {
                 errors.add(ex.getMessage());
             }
