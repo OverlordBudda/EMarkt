@@ -62,27 +62,27 @@ public class User implements Serializable {
     private String name;
     
     @Column(name = "STRASSE", length = 64)
-    @Size(min = 5, max = 64, message = "Feld muss zwischen fünf und 64 Zeichen lang sein.")
+    @Size(min = 5, max = 64, message = "Feld Straße muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Straße und Nr. darf nicht leer sein.")
     private String strasse;
     
     @Column(name = "PLZ", length = 5)
-    @Size(min = 5, max = 5, message = "Feld muss zwischen fünf lang sein.")
+    @Size(min = 5, max = 5, message = "Feld PLZ muss fünf lang sein.")
     @NotNull(message = "PLZ darf nicht leer sein.")
     private String plz;
 
     @Column(name = "ORT", length = 64)
-    @Size(min = 4, max = 64, message = "Feld muss zwischen fünf lang sein.")
+    @Size(min = 4, max = 64, message = "Feld Ort muss zwischen fünf  und 64 Zeichen lang sein.")
     @NotNull(message = "Ort darf nicht leer sein.")
     private String ort;
     
     @Column(name = "TELEFON", length = 5)
-    @Size(min = 5, max = 64, message = "Feld muss zwischen fünf lang sein.")
+    @Size(min = 5, max = 64, message = "Feld Telefon muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "telefon darf nicht leer sein.")
     private String telefon;
 
     @Column(name = "MAIL", length = 64)
-    @Size(min = 4, max = 64, message = "Feld muss zwischen fünf lang sein.")
+    @Size(min = 4, max = 64, message = "Feld Mmail muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Mail darf nicht leer sein.")
     private String mail;
     

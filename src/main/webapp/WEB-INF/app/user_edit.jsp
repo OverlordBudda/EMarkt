@@ -36,93 +36,93 @@
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
                     <h2>Logindaten</h2>        
                     <%-- Eingabefelder --%>
-                    <label for="signup_username">
+                    <label for="edit_username">
                         Benutzername:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_username" value="${signup_form.values["signup_username"][0]}">
+                        <input type="text" name="edit_username" value="${edit_form.values["edit_username"][0]}" >
                     </div>
                     
-                    <label for="signup_oldpw">
+                    <label for="edit_oldpw">
                         altes Passwort:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="password" name="signup_oldpw" value="${signup_form.values["signup_oldpw"][0]}">
+                        <input type="password" name="edit_oldpw" value="${edit_form.values["edit_oldpw"][0]}">
                     </div>
                     
-                    <label for="signup_password1">
+                    <label for="edit_password1">
                         Passwort:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="password" name="signup_password1" value="${signup_form.values["signup_password1"][0]}">
+                        <input type="password" name="edit_password1" value="${edit_form.values["edit_password1"][0]}">
                     </div>
 
-                    <label for="signup_password2">
+                    <label for="edit_password2">
                         Passwort (wdh.):
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="password" name="signup_password2" value="${signup_form.values["signup_password2"][0]}">
+                        <input type="password" name="edit_password2" value="${edit_form.values["edit_password2"][0]}">
                     </div>
                     
                     <h2>Anschrift</h2>
-                    <label for="signup_name">
+                    <label for="edit_name">
                         Vor- und Nachname:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_name" value="${signup_form.values["signup_name"][0]}">
+                        <input type="text" name="edit_name" value="${edit_form.values["edit_name"][0]}">
                     </div>
                     
-                    <label for="signup_strasse">
+                    <label for="edit_strasse">
                         Strassenname & Hausnummer:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_strasse" value="${signup_form.values["signup_strasse"][0]}">
+                        <input type="text" name="edit_strasse" value="${edit_form.values["edit_strasse"][0]}">
                     </div>
                     
-                    <label for="signup_plz">
+                    <label for="edit_plz">
                         PLZ & Ort:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}">
-                        <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}">
+                        <input type="text" name="edit_plz" value="${edit_form.values["edit_plz"][0]}">
+                        <input type="text" name="edit_ort" value="${edit_form.values["edit_ort"][0]}">
                     </div>
                     
                     <h2>Kontaktdaten</h2>
-                    <label for="signup_telefon">
+                    <label for="edit_telefon">
                         Telefonnummer:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_telefon" value="${signup_form.values["signup_telefon"][0]}">
+                        <input type="text" name="edit_telefon" value="${edit_form.values["edit_telefon"][0]}">
                     </div>
                     
-                    <label for="signup_mail">
+                    <label for="edit_mail">
                         E-Mail:
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
-                        <input type="text" name="signup_mail" value="${signup_form.values["signup_mail"][0]}">
+                        <input type="text" name="edit_mail" value="${edit_form.values["edit_mail"][0]}">
                     </div>
                     
                     <%-- Button zum Abschicken --%>
                     <div class="side-by-side">
                         <button class="icon-pencil" type="submit">
-                            Registrieren
+                            Ändern
                         </button>
                     </div>
                 </div>
 
                 <%-- Fehlermeldungen --%>
-                <c:if test="${!empty signup_form.errors}">
+                <c:if test="${!empty edit_form.errors}">
                     <ul class="errors">
-                        <c:forEach items="${signup_form.errors}" var="error">
+                        <c:forEach items="${edit_form.errors}" var="error">
                             <li>${error}</li>
                             </c:forEach>
                     </ul>
