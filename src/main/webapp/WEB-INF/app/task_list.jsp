@@ -51,12 +51,12 @@
                 </c:forEach>
             </select>
 
-            <select name="search_status">
-                <option value="">Alle Stati</option>
+            <select name="search_angebotsArt">
+                <option value="">Alle Angebotsarten</option>
 
-                <c:forEach items="${statuses}" var="status">
-                    <option value="${status}" ${param.search_status == status ? 'selected' : ''}>
-                        <c:out value="${status.label}"/>
+                <c:forEach items="${angebotsArten}" var="angebotsArt">
+                    <option value="${angebotsArt}" ${param.search_angebotsArt == angebotsArt ? 'selected' : ''}>
+                        <c:out value="${angebotsArt}"/>
                     </option>
                 </c:forEach>
             </select>
@@ -102,16 +102,16 @@
                                 <c:out value="${task.owner.username}"/>
                             </td>
                             <td>
-                                <c:out value="${task.type.label}"/>
+                                <c:out value="${task.angebotsArt}"/>
                             </td>
                             <td>
-                                <c:out value="${task.price}"/>
+                                <c:out value="${task.angebotsPreis}"/>
                             </td>
                             <td>
-                                <c:out value="${task.price.type}"/>
+                                <c:out value="${task.preisArt}"/>
                             </td>
                             <td>
-                                <c:out value="${utils.formatDate(task.Date)}"/>
+                                <c:out value="${task.dueDate}"/>
                             </td>
                         </tr>
                     </c:forEach>

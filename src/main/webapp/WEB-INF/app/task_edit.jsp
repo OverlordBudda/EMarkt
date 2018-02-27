@@ -60,14 +60,14 @@
                     </select>
                 </div>
                 
-                <label for="task_type">Art des Angebots:</label>
+                <label for="task_angebotsArt">Art des Angebots:</label>
                 <div class="side-by-side">
-                    <select name="task_type">
+                    <select name="task_angebotsArt">
                         <option value="">Wähle</option>
 
-                        <c:forEach items="${types}" var="type">
-                            <option value="${type.id}" ${task_form.values["task_type"][0] == type.id ? 'selected' : ''}>
-                                <c:out value="${type.name}" />
+                        <c:forEach items="${angebotsArten}" var="angebotsArt">
+                            <option value="${angebotsArt}" ${task_form.values["task_angebotsArt"][0] == angebotsArt ? 'selected' : ''}>
+                                <c:out value="${angebotsArt}" />
                             </option>
                         </c:forEach>
                     </select>
@@ -88,14 +88,14 @@
                     <input type="text" name="task_longtext" value="${task_form.values["task_longtext"][0]}" >
                 </div>
                 
-                <label for="task_type">Preis:</label>
+                <label for="task_preisArt">Preis:</label>
                 <div class="side-by-side">
-                    <select name="task_preistype">
+                    <select name="task_preisArt">
                         <option value="">Wähle</option>
 
-                        <c:forEach items="${preistypes}" var="type">
-                            <option value="${preistype.id}" ${task_form.values["task_preistype"][0] == preistype.id ? 'selected' : ''}>
-                                <c:out value="${preistype.name}" />
+                        <c:forEach items="${preisArten}" var="preisArt">
+                            <option value="${preisArt}" ${task_form.values["task_preisArt"][0] == preisArt ? 'selected' : ''}>
+                                <c:out value="${preisArt}" />
                             </option>
                         </c:forEach>
                     </select>

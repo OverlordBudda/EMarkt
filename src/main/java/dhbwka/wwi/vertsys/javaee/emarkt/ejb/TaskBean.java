@@ -11,7 +11,7 @@ package dhbwka.wwi.vertsys.javaee.emarkt.ejb;
 
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Category;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.emarkt.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javaee.emarkt.jpa.AngebotsArt;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -49,10 +49,10 @@ public class TaskBean extends EntityBean<Task, Long> {
      * 
      * @param search In der Kurzbeschreibung enthaltener Text (optional)
      * @param category Kategorie (optional)
-     * @param status Status (optional)
+     * @param angebotsArt AngebotsArt (optional)
      * @return Liste mit den gefundenen Aufgaben
      */
-    public List<Task> search(String search, Category category, TaskStatus status) {
+    public List<Task> search(String search, Category category, AngebotsArt angebotsArt) {
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         
@@ -74,9 +74,9 @@ public class TaskBean extends EntityBean<Task, Long> {
             query.where(cb.equal(from.get("category"), category));
         }
         
-        // WHERE t.status = :status
-        if (status != null) {
-            query.where(cb.equal(from.get("status"), status));
+        // WHERE t.angebotsart = :angebotsart
+        if (angebotsArt != null) {
+            query.where(cb.equal(from.get("angebotsart"), angebotsArt));
         }
         
         return em.createQuery(query).getResultList();

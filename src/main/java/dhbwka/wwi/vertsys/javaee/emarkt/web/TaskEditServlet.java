@@ -10,11 +10,13 @@
 package dhbwka.wwi.vertsys.javaee.emarkt.web;
 
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.CategoryBean;
+import dhbwka.wwi.vertsys.javaee.emarkt.ejb.AngebotsArtBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.ValidationBean;
+import dhbwka.wwi.vertsys.javaee.emarkt.jpa.AngebotsArt;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.emarkt.jpa.TaskStatus;
+import dhbwka.wwi.vertsys.javaee.emarkt.jpa.PreisArt;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -41,7 +43,7 @@ public class TaskEditServlet extends HttpServlet {
 
     @EJB
     CategoryBean categoryBean;
-
+    
     @EJB
     UserBean userBean;
 
@@ -54,7 +56,8 @@ public class TaskEditServlet extends HttpServlet {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.categoryBean.findAllSorted());
-        request.setAttribute("statuses", TaskStatus.values());
+        request.setAttribute("angebotsArten", AngebotsArt.values());
+        request.setAttribute("preisArten", PreisArt.values());
 
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
@@ -112,12 +115,17 @@ public class TaskEditServlet extends HttpServlet {
         List<String> errors = new ArrayList<>();
 
         String taskCategory = request.getParameter("task_category");
-        String taskDueDate = request.getParameter("task_due_date");
-        String taskDueTime = request.getParameter("task_due_time");
-        String taskStatus = request.getParameter("task_status");
-        String taskShortText = request.getParameter("task_short_text");
-        String taskLongText = request.getParameter("task_long_text");
-
+        String taskAngebotsArt = request.getParameter("task_angebotsArt");
+//        String taskDueDate = request.getParameter("task_due_date");
+//        String taskDueTime = request.getParameter("task_due_time");
+        String taskPreisArt = request.getParameter("task_preisArt");
+        String taskAngebotsPreis = request.getParameter("task_preis");
+        String taskShortText = request.getParameter("task_shorttext");
+        String taskLongText = request.getParameter("task_longtext");
+        
+        Date datum = new Date(System.currentTimeMillis());
+        Time zeit = new Time(System.currentTimeMillis());
+        
         Task task = this.getRequestedTask(request);
 
         if (taskCategory != null && !taskCategory.trim().isEmpty()) {
@@ -128,27 +136,37 @@ public class TaskEditServlet extends HttpServlet {
             }
         }
 
-        Date dueDate = WebUtils.parseDate(taskDueDate);
-        Time dueTime = WebUtils.parseTime(taskDueTime);
+//        Date dueDate = WebUtils.parseDate(taskDueDate);
+//        Time dueTime = WebUtils.parseTime(taskDueTime);
 
-        if (dueDate != null) {
-            task.setDueDate(dueDate);
-        } else {
-            errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
-        }
-
-        if (dueTime != null) {
-            task.setDueTime(dueTime);
-        } else {
-            errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
-        }
-
+//        if (dueDate != null) {
+            task.setDueDate(datum);
+//        } else {
+//            errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
+//        }
+//
+//        if (dueTime != null) {
+            task.setDueTime(zeit);
+//        } else {
+//            errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
+//        }
+        
         try {
-            task.setStatus(TaskStatus.valueOf(taskStatus));
+            task.setAngebotsArt(AngebotsArt.valueOf(taskAngebotsArt));
         } catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
-
+        try {
+            task.setPreisArt(PreisArt.valueOf(taskPreisArt));
+        } catch (IllegalArgumentException ex) {
+            errors.add("Der ausgewählte Status ist nicht vorhanden.");
+        }
+        try{
+           task.setAngebotsPreis(taskAngebotsPreis); 
+        }catch (IllegalArgumentException ex) {
+            errors.add("Der ausgewählte Status ist nicht vorhanden.");
+        }
+        
         task.setShortText(taskShortText);
         task.setLongText(taskLongText);
 
@@ -264,10 +282,16 @@ public class TaskEditServlet extends HttpServlet {
             WebUtils.formatTime(task.getDueTime())
         });
 
-        values.put("task_status", new String[]{
-            task.getStatus().toString()
+        values.put("task_angebotsArt", new String[]{
+            task.getAngebotsArt().toString()
         });
-
+        values.put("task_preisArt", new String[]{
+            task.getPreisArt().toString()
+        });
+        values.put("task_preis", new String[]{
+            task.getAngebotsPreis()        
+        });
+        
         values.put("task_short_text", new String[]{
             task.getShortText()
         });

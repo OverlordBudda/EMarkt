@@ -48,6 +48,13 @@ public class Task implements Serializable {
     @NotNull(message = "Die Bezeichnung darf nicht leer sein.")
     @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
     private String shortText;
+        
+    @Column(length = 64)
+    @NotNull(message = "Die Angebotsart darf nicht leer sein.")
+    @Size(min = 1, max = 64, message = "Die Angebotsart muss zwischen ein und 50 Zeichen lang sein.")
+    private String angebotsPreis;
+    
+  
 
     @Lob
     @NotNull
@@ -61,17 +68,24 @@ public class Task implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private TaskStatus status = TaskStatus.OPEN;
+    private AngebotsArt angebotsArt = AngebotsArt.SUCHE;
+    
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private PreisArt preisArt = PreisArt.FESTPREIS;
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Task() {
     }
 
-    public Task(User owner, Category category, String shortText, String longText, Date dueDate, Time dueTime) {
+    public Task(User owner, Category category, AngebotsArt angebotsArt, String shortText, String longText,PreisArt preisArt, String angebotsPreis, Date dueDate, Time dueTime) {
         this.owner = owner;
         this.category = category;
+        this.angebotsArt = angebotsArt;
         this.shortText = shortText;
         this.longText = longText;
+        this.preisArt = preisArt;
+        this.angebotsPreis = angebotsPreis;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
     }
@@ -134,13 +148,40 @@ public class Task implements Serializable {
         this.dueTime = dueTime;
     }
 
+    /*
     public TaskStatus getStatus() {
         return status;
     }
 
     public void setStatus(TaskStatus status) {
         this.status = status;
-    }
+    }*/
+    
     //</editor-fold>
+
+    public String getAngebotsPreis() {
+        return angebotsPreis;
+    }
+
+    public void setAngebotsPreis(String angebotsPreis) {
+        this.angebotsPreis = angebotsPreis;
+    }
+
+    public AngebotsArt getAngebotsArt() {
+        return angebotsArt;
+    }
+
+    public void setAngebotsArt(AngebotsArt angebotsArt) {
+        this.angebotsArt = angebotsArt;
+    }
+
+    public PreisArt getPreisArt() {
+        return preisArt;
+    }
+
+    public void setPreisArt(PreisArt preisArt) {
+        this.preisArt = preisArt;
+    }
+
 
 }
