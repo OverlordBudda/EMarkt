@@ -73,66 +73,35 @@
                     </select>
                 </div>
                 
-                <label for="task_shorttext">Bezeichnung:</label>
+                <label for="task_shorttext">
+                    Bezeichnung:
+                    <span class="required">*</span>
+                </label>
                 <div class="side-by-side">
                     <input type="text" name="task_shorttext" value="${task_form.values["task_shorttext"][0]}" >
                 </div>
                 
-                <label for="task_longtext">Beschreibung:</label>
+                <label for="task_longtext">
+                    Beschreibung:
+                </label>
                 <div class="side-by-side">
                     <input type="text" name="task_longtext" value="${task_form.values["task_longtext"][0]}" >
                 </div>
                 
                 <label for="task_type">Preis:</label>
                 <div class="side-by-side">
-                    <select name="task_type">
+                    <select name="task_preistype">
                         <option value="">Wähle</option>
 
-                        <c:forEach items="${types}" var="type">
-                            <option value="${type.id}" ${task_form.values["task_type"][0] == type.id ? 'selected' : ''}>
-                                <c:out value="${type.name}" />
+                        <c:forEach items="${preistypes}" var="type">
+                            <option value="${preistype.id}" ${task_form.values["task_preistype"][0] == preistype.id ? 'selected' : ''}>
+                                <c:out value="${preistype.name}" />
                             </option>
                         </c:forEach>
                     </select>
+                    <input type="text" name="task_preis" value="${task_form.values["task_preis"][0]}" >
                 </div>
 
-                <label for="task_due_date">
-                    Fällig am:
-                    <span class="required">*</span>
-                </label>
-                <div class="side-by-side">
-                    <input type="text" name="task_due_date" value="${task_form.values["task_due_date"][0]}">
-                    <input type="text" name="task_due_time" value="${task_form.values["task_due_time"][0]}">
-                </div>
-
-                <label for="task_status">
-                    Status:
-                    <span class="required">*</span>
-                </label>
-                <div class="side-by-side margin">
-                    <select name="task_status">
-                        <c:forEach items="${statuses}" var="status">
-                            <option value="${status}" ${task_form.values["task_status"][0] == status ? 'selected' : ''}>
-                                <c:out value="${status.label}"/>
-                            </option>
-                        </c:forEach>
-                    </select>
-                </div>
-
-                <label for="task_short_text">
-                    Bezeichnung:
-                    <span class="required">*</span>
-                </label>
-                <div class="side-by-side">
-                    <input type="text" name="task_short_text" value="${task_form.values["task_short_text"][0]}">
-                </div>
-
-                <label for="task_long_text">
-                    Beschreibung:
-                </label>
-                <div class="side-by-side">
-                    <textarea name="task_long_text"><c:out value="${task_form.values['task_long_text'][0]}"/></textarea>
-                </div>
 
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">
@@ -146,6 +115,16 @@
                         </button>
                     </c:if>
                 </div>
+                
+                <label>Angelegt am:</label>
+                <div class="side-by-side">
+                    
+                </div>    
+                
+                <label>Anbieter:</label>
+                <div class="side-by-side">
+                    
+                </div>  
             </div>
 
             <%-- Fehlermeldungen --%>
