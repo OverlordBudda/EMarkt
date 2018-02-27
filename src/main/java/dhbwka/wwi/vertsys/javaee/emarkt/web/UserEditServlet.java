@@ -73,13 +73,13 @@ public class UserEditServlet extends HttpServlet {
         String telefon = request.getParameter("edit_telefon");
         String mail = request.getParameter("edit_mail");
        
-        int iplz=00000;
-        try{
-             iplz = Integer.parseInt(plz);
-        
-        }catch (NumberFormatException nfe){
-            
-        }
+//        int iplz=00000;
+//        try{
+//             iplz = Integer.parseInt(plz);
+//        
+//        }catch (NumberFormatException nfe){
+//            
+//        }
         
         // Eingaben prüfen
         User user = new User(username, password1, name, strasse, plz, ort, telefon, mail);
@@ -103,7 +103,7 @@ public class UserEditServlet extends HttpServlet {
             // Keine Fehler: Startseite aufrufen
             response.sendRedirect(WebUtils.appUrl(request, "/app/user/"));
         } else {
-            // Fehler: Formuler erneut anzeigen
+            // Fehler: Formular erneut anzeigen
             FormValues formValues = new FormValues();
             formValues.setValues(request.getParameterMap());
             formValues.setErrors(errors);
@@ -123,6 +123,17 @@ public class UserEditServlet extends HttpServlet {
 
         values.put("edit_name", new String[]{
             user.getName()
+        });
+        
+        values.put("edit_password1", new String[]{
+            "default"
+        });
+        
+        values.put("edit_password2", new String[]{
+            "default"
+        });
+        values.put("edit_oldpw", new String[]{
+            "default"
         });
 
         values.put("edit_strasse", new String[]{

@@ -49,7 +49,7 @@
                         <option value="">Keine Kategorie</option>
 
                         <c:forEach items="${categories}" var="category">
-                            <option value="${category.id}" ${task_form.values["task_category"][0] == category.id ? 'selected' : ''}>
+                            <option value="${category}" ${task_form.values["task_category"][0] == category ? 'selected' : ''}>
                                 <c:out value="${category.name}" />
                             </option>
                         </c:forEach>
@@ -74,14 +74,14 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_shorttext" value="${task_form.values["task_shorttext"][0]}" >
+                    <input type="text" name="task_shorttext" value="${task_form.values["task_short_text"][0]}" >
                 </div>
                 
                 <label for="task_longtext">
                     Beschreibung:
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_longtext" value="${task_form.values["task_longtext"][0]}" >
+                    <input type="text" name="task_longtext" value="${task_form.values["task_long_text"][0]}" >
                 </div>
                 
                 <label for="task_preisArt">Preis:</label>
@@ -114,13 +114,18 @@
                 
                 <label>Angelegt am:</label>
                 <div class="side-by-side">
-                    
+                    <label>${task_form.values["task_due_date"][0]} ${task_form.values["task_due_time"][0]}</label> <br>
+
                 </div>    
                 
                 <label>Anbieter:</label>
-                <div class="side-by-side">
-                    
-                </div>  
+                <div class="side-by-side"> </div>                    
+                    <label>${task_form.values["task_owner"][1]}</label>
+                    <label>${task_form.values["task_owner"][2]}</label>
+                    <label>${task_form.values["task_owner"][3]}</label> 
+                    <label>${task_form.values["task_owner"][4]}</label> 
+
+                
             </div>
 
             <%-- Fehlermeldungen --%>
