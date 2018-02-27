@@ -17,10 +17,10 @@
     <jsp:attribute name="title">
         <c:choose>
             <c:when test="${edit}">
-                Aufgabe bearbeiten
+                Angebot bearbeiten
             </c:when>
             <c:otherwise>
-                Aufgabe anlegen
+                Angebot anlegen
             </c:otherwise>
         </c:choose>
     </jsp:attribute>
@@ -42,10 +42,10 @@
                 <input type="hidden" name="csrf_token" value="${csrf_token}">
 
                 <%-- Eingabefelder --%>
-                <label for="task_owner">Eigentümer:</label>
+               <!-- <label for="task_owner">Eigentümer:</label>
                 <div class="side-by-side">
                     <input type="text" name="task_owner" value="${task_form.values["task_owner"][0]}" readonly="readonly">
-                </div>
+                </div> -->
 
                 <label for="task_category">Kategorie:</label>
                 <div class="side-by-side">
@@ -55,6 +55,42 @@
                         <c:forEach items="${categories}" var="category">
                             <option value="${category.id}" ${task_form.values["task_category"][0] == category.id ? 'selected' : ''}>
                                 <c:out value="${category.name}" />
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+                <label for="task_type">Art des Angebots:</label>
+                <div class="side-by-side">
+                    <select name="task_type">
+                        <option value="">Wähle</option>
+
+                        <c:forEach items="${types}" var="type">
+                            <option value="${type.id}" ${task_form.values["task_type"][0] == type.id ? 'selected' : ''}>
+                                <c:out value="${type.name}" />
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                
+                <label for="task_shorttext">Bezeichnung:</label>
+                <div class="side-by-side">
+                    <input type="text" name="task_shorttext" value="${task_form.values["task_shorttext"][0]}" >
+                </div>
+                
+                <label for="task_longtext">Beschreibung:</label>
+                <div class="side-by-side">
+                    <input type="text" name="task_longtext" value="${task_form.values["task_longtext"][0]}" >
+                </div>
+                
+                <label for="task_type">Preis:</label>
+                <div class="side-by-side">
+                    <select name="task_type">
+                        <option value="">Wähle</option>
+
+                        <c:forEach items="${types}" var="type">
+                            <option value="${type.id}" ${task_form.values["task_type"][0] == type.id ? 'selected' : ''}>
+                                <c:out value="${type.name}" />
                             </option>
                         </c:forEach>
                     </select>
