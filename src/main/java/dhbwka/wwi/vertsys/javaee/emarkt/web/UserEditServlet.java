@@ -101,7 +101,7 @@ public class UserEditServlet extends HttpServlet {
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/user/"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/tasks/"));
         } else {
             // Fehler: Formular erneut anzeigen
             FormValues formValues = new FormValues();

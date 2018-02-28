@@ -28,6 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -84,6 +85,7 @@ public class User implements Serializable {
     @Column(name = "MAIL", length = 64)
     @Size(min = 4, max = 64, message = "Feld Mmail muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Mail darf nicht leer sein.")
+    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$")
     private String mail;
     
     @ElementCollection

@@ -53,7 +53,7 @@
                     </div>
                     
                     <label for="edit_password1">
-                        Passwort:
+                        Passwort (PW ändern sonst "default"):
                         <span class="required">*</span>
                     </label>
                     <div class="side-by-side">
@@ -118,7 +118,6 @@
                         </button>
                     </div>
                 </div>
-
                 <%-- Fehlermeldungen --%>
                 <c:if test="${!empty edit_form.errors}">
                     <ul class="errors">

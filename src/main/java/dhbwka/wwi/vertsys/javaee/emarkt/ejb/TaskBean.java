@@ -76,7 +76,7 @@ public class TaskBean extends EntityBean<Task, Long> {
         
         // WHERE t.angebotsart = :angebotsart
         if (angebotsArt != null) {
-            query.where(cb.equal(from.get("angebotsart"), angebotsArt));
+            query.where(cb.equal(from.get("angebotsArt"), angebotsArt));
         }
         
         return em.createQuery(query).getResultList();

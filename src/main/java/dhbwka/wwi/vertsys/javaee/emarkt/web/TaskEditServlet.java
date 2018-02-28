@@ -16,6 +16,7 @@ import dhbwka.wwi.vertsys.javaee.emarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.AngebotsArt;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Task;
+import dhbwka.wwi.vertsys.javaee.emarkt.jpa.User;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.PreisArt;
 import java.io.IOException;
 import java.sql.Date;
@@ -49,7 +50,7 @@ public class TaskEditServlet extends HttpServlet {
 
     @EJB
     ValidationBean validationBean;
-
+   
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,7 +59,8 @@ public class TaskEditServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("angebotsArten", AngebotsArt.values());
         request.setAttribute("preisArten", PreisArt.values());
-
+        
+       
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
 
@@ -169,7 +171,6 @@ public class TaskEditServlet extends HttpServlet {
         
         task.setShortText(taskShortText);
         task.setLongText(taskLongText);
-
         this.validationBean.validate(task, errors);
 
         // Datensatz speichern
@@ -262,8 +263,10 @@ public class TaskEditServlet extends HttpServlet {
      * @return Neues, gefülltes FormValues-Objekt
      */
     private FormValues createTaskForm(Task task) {
+   
+        
         Map<String, String[]> values = new HashMap<>();
-
+        
         values.put("task_owner", new String[]{
             task.getOwner().getUsername(), 
             task.getOwner().getName(), 
@@ -275,7 +278,7 @@ public class TaskEditServlet extends HttpServlet {
 
         if (task.getCategory() != null) {
             values.put("task_category", new String[]{
-                task.getCategory().toString()
+                task.getCategory().getName()
             });
         }
 

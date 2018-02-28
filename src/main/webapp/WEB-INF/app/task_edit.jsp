@@ -45,11 +45,12 @@
 
                 <label for="task_category">Kategorie:</label>
                 <div class="side-by-side">
-                    <select name="task_category">
-                        <option value="">Keine Kategorie</option>
+                        <select name="task_category">
+                   
+                            <option value="" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>Keine Kategorie</option>
 
                         <c:forEach items="${categories}" var="category">
-                            <option value="${category}" ${task_form.values["task_category"][0] == category ? 'selected' : ''}>
+                            <option value="${category.id}" ${task_form.values["task_category"][0] == category.name ? 'selected' : ''} ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                                 <c:out value="${category.name}" />
                             </option>
                         </c:forEach>
@@ -59,10 +60,10 @@
                 <label for="task_angebotsArt">Art des Angebots:</label>
                 <div class="side-by-side">
                     <select name="task_angebotsArt">
-                        <option value="">Wähle</option>
+                        <option value="" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>Wähle</option>
 
                         <c:forEach items="${angebotsArten}" var="angebotsArt">
-                            <option value="${angebotsArt}" ${task_form.values["task_angebotsArt"][0] == angebotsArt ? 'selected' : ''}>
+                            <option value="${angebotsArt}" ${task_form.values["task_angebotsArt"][0] == angebotsArt ? 'selected' : ''}${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                                 <c:out value="${angebotsArt}" />
                             </option>
                         </c:forEach>
@@ -74,39 +75,40 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_shorttext" value="${task_form.values["task_short_text"][0]}" >
+                    <input type="text" name="task_shorttext" value="${task_form.values["task_short_text"][0]}" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal.toString() ? '' : 'disabled'} >
                 </div>
                 
                 <label for="task_longtext">
                     Beschreibung:
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="task_longtext" value="${task_form.values["task_long_text"][0]}" >
+                    <input type="text" name="task_longtext" value="${task_form.values["task_long_text"][0]}" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'} >
                 </div>
                 
                 <label for="task_preisArt">Preis:</label>
                 <div class="side-by-side">
                     <select name="task_preisArt">
-                        <option value="">Wähle</option>
+                        <option value="" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>Wähle</option>
 
                         <c:forEach items="${preisArten}" var="preisArt">
-                            <option value="${preisArt}" ${task_form.values["task_preisArt"][0] == preisArt ? 'selected' : ''}>
+                            <option value="${preisArt}" ${task_form.values["task_preisArt"][0] == preisArt ? 'selected' : ''}${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                                 <c:out value="${preisArt}" />
                             </option>
                         </c:forEach>
                     </select>
-                    <input type="text" name="task_preis" value="${task_form.values["task_preis"][0]}" >
+                    
+                    <input type="text" name="task_preis" value="${task_form.values["task_preis"][0]}" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                 </div>
 
 
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">
-                    <button class="icon-pencil" type="submit" name="action" value="save">
+                    <button class="icon-pencil" type="submit" name="action" value="save" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                         Sichern
                     </button>
 
                     <c:if test="${edit}">
-                        <button class="icon-trash" type="submit" name="action" value="delete">
+                        <button class="icon-trash" type="submit" name="action" value="delete" ${task_form.values["task_owner"][0] == pageContext.request.userPrincipal ? '' : 'disabled'}>
                             Löschen
                         </button>
                     </c:if>
