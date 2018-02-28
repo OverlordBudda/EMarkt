@@ -65,13 +65,7 @@ public class SignUpServlet extends HttpServlet {
         String ort = request.getParameter("signup_ort");
         String telefon = request.getParameter("signup_telefon");
         String mail = request.getParameter("signup_mail");
-        int iplz=00000;
-        try{
-             iplz = Integer.parseInt(plz);
-        
-        }catch (NumberFormatException nfe){
-            
-        }
+
         
         // Eingaben prüfen
         User user = new User(username, password1, name, strasse, plz, ort, telefon, mail);

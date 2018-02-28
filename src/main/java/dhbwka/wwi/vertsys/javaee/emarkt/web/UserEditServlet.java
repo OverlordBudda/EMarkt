@@ -11,7 +11,6 @@ package dhbwka.wwi.vertsys.javaee.emarkt.web;
 
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.UserBean;
-import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Task;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.User;
 import java.io.IOException;
 import java.util.HashMap;
@@ -72,20 +71,12 @@ public class UserEditServlet extends HttpServlet {
         String ort = request.getParameter("edit_ort");
         String telefon = request.getParameter("edit_telefon");
         String mail = request.getParameter("edit_mail");
-       
-//        int iplz=00000;
-//        try{
-//             iplz = Integer.parseInt(plz);
-//        
-//        }catch (NumberFormatException nfe){
-//            
-//        }
-        
+              
         // Eingaben prüfen
         User user = new User(username, password1, name, strasse, plz, ort, telefon, mail);
         List<String> errors = this.validationBean.validate(user);
         this.validationBean.validate(user.getPassword(), errors);
-        
+                
         if (password1 != null && password2 != null && !password1.equals(password2)) {
             errors.add("Die beiden Passwörter stimmen nicht überein.");
         }
@@ -102,11 +93,12 @@ public class UserEditServlet extends HttpServlet {
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
             response.sendRedirect(WebUtils.appUrl(request, "/app/tasks/"));
-        } else {
+        } 
+        else {
             // Fehler: Formular erneut anzeigen
             FormValues formValues = new FormValues();
-            formValues.setValues(request.getParameterMap());
             formValues.setErrors(errors);
+            formValues.setValues(request.getParameterMap());
             
             HttpSession session = request.getSession();
             session.setAttribute("edit_form", formValues);
@@ -160,5 +152,4 @@ public class UserEditServlet extends HttpServlet {
         formValues.setValues(values);
         return formValues;
     }
-    
 }

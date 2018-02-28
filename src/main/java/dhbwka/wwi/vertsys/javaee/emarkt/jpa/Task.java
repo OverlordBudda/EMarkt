@@ -147,18 +147,6 @@ public class Task implements Serializable {
     public void setDueTime(Time dueTime) {
         this.dueTime = dueTime;
     }
-
-    /*
-    public TaskStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TaskStatus status) {
-        this.status = status;
-    }*/
-    
-    //</editor-fold>
-
     public String getAngebotsPreis() {
         return angebotsPreis;
     }
@@ -182,6 +170,7 @@ public class Task implements Serializable {
     public void setPreisArt(PreisArt preisArt) {
         this.preisArt = preisArt;
     }
-
+    
+    //</editor-fold>
 
 }

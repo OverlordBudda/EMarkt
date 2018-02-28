@@ -83,7 +83,7 @@ public class User implements Serializable {
     private String telefon;
 
     @Column(name = "MAIL", length = 64)
-    @Size(min = 4, max = 64, message = "Feld Mmail muss zwischen fünf und 64 Zeichen lang sein.")
+    @Size(min = 4, max = 64, message = "Feld Mail muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Mail darf nicht leer sein.")
     @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$")
     private String mail;

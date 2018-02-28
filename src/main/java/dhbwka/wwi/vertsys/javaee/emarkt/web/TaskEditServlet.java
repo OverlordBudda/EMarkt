@@ -10,13 +10,11 @@
 package dhbwka.wwi.vertsys.javaee.emarkt.web;
 
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.emarkt.ejb.AngebotsArtBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.TaskBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.AngebotsArt;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.emarkt.jpa.User;
 import dhbwka.wwi.vertsys.javaee.emarkt.jpa.PreisArt;
 import java.io.IOException;
 import java.sql.Date;
@@ -75,7 +73,6 @@ public class TaskEditServlet extends HttpServlet {
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/app/task_edit.jsp").forward(request, response);
-
         session.removeAttribute("task_form");
     }
 
@@ -118,8 +115,6 @@ public class TaskEditServlet extends HttpServlet {
 
         String taskCategory = request.getParameter("task_category");
         String taskAngebotsArt = request.getParameter("task_angebotsArt");
-//        String taskDueDate = request.getParameter("task_due_date");
-//        String taskDueTime = request.getParameter("task_due_time");
         String taskPreisArt = request.getParameter("task_preisArt");
         String taskAngebotsPreis = request.getParameter("task_preis");
         String taskShortText = request.getParameter("task_shorttext");
@@ -137,22 +132,9 @@ public class TaskEditServlet extends HttpServlet {
                 // Ungültige oder keine ID mitgegeben
             }
         }
+        task.setDueDate(datum);
+        task.setDueTime(zeit);
 
-//        Date dueDate = WebUtils.parseDate(taskDueDate);
-//        Time dueTime = WebUtils.parseTime(taskDueTime);
-
-//        if (dueDate != null) {
-            task.setDueDate(datum);
-//        } else {
-//            errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
-//        }
-//
-//        if (dueTime != null) {
-            task.setDueTime(zeit);
-//        } else {
-//            errors.add("Die Uhrzeit muss dem Format hh:mm:ss entsprechen.");
-//        }
-        
         try {
             task.setAngebotsArt(AngebotsArt.valueOf(taskAngebotsArt));
         } catch (IllegalArgumentException ex) {
@@ -168,7 +150,6 @@ public class TaskEditServlet extends HttpServlet {
         }catch (IllegalArgumentException ex) {
             errors.add("Der ausgewählte Status ist nicht vorhanden.");
         }
-        
         task.setShortText(taskShortText);
         task.setLongText(taskLongText);
         this.validationBean.validate(task, errors);
@@ -223,6 +204,7 @@ public class TaskEditServlet extends HttpServlet {
      * @return Zu bearbeitende Aufgabe
      */
     private Task getRequestedTask(HttpServletRequest request) {
+        
         // Zunächst davon ausgehen, dass ein neuer Satz angelegt werden soll
         Task task = new Task();
         task.setOwner(this.userBean.getCurrentUser());
@@ -248,7 +230,6 @@ public class TaskEditServlet extends HttpServlet {
         } catch (NumberFormatException ex) {
             // Ungültige oder keine ID in der URL enthalten
         }
-
         return task;
     }
 
@@ -263,8 +244,7 @@ public class TaskEditServlet extends HttpServlet {
      * @return Neues, gefülltes FormValues-Objekt
      */
     private FormValues createTaskForm(Task task) {
-   
-        
+
         Map<String, String[]> values = new HashMap<>();
         
         values.put("task_owner", new String[]{

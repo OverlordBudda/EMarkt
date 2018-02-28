@@ -118,12 +118,13 @@
                         </button>
                     </div>
                 </div>
+
                 <%-- Fehlermeldungen --%>
                 <c:if test="${!empty edit_form.errors}">
                     <ul class="errors">
                         <c:forEach items="${edit_form.errors}" var="error">
                             <li>${error}</li>
-                            </c:forEach>
+                        </c:forEach>
                     </ul>
                 </c:if>
             </form>
